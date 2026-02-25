@@ -130,6 +130,134 @@ This database is designed to:
 - [ ] Geological domain modeling
 - [ ] Structural hierarchy implementation
 - [ ] Geochemical normalization tools
-- [ ] Spatial visualization integration
+- [ ] Spatial visualization 
 
-EOF
+Geological Core Engine – Schema 4.0
+
+Overview
+
+This repository contains the modular database architecture for a multi-tenant geological exploration system.
+
+Designed for:
+	•	Intermediate exploration stage
+	•	Transitional porphyry–epithermal systems
+	•	Gold-dominant environments
+	•	Domain-driven geological modeling
+	•	Scalable SaaS deployment
+
+Location context (conceptual): San Juan, Argentina.
+
+⸻
+
+Architectural Philosophy
+
+This schema separates:
+	•	Physical intervals (Samples)
+	•	Analytical data (Assays)
+	•	Geological interpretation (Lithology, Alteration, Mineralization)
+	•	Structural hierarchy
+	•	Domain modeling
+
+The interval is the fundamental geological unit.
+
+No analytical shortcut replaces geological reasoning.
+
+⸻
+
+Core Design Principles
+	•	UUID v4 across all entities
+	•	PostGIS spatial support
+	•	numrange for depth intervals
+	•	EXCLUDE constraints to prevent interval overlap
+	•	CRS default 4326
+	•	Multi-tenant architecture
+	•	Modular SQL implementation
+
+⸻
+
+Modular Structure
+
+database/
+│
+├── 00_extensions.sql
+├── 01_multitenant.sql
+├── 02_core_drillholes.sql
+├── 03_sampling.sql
+├── 04_geochemistry.sql
+├── 05_geology.sql
+├── 06_structural.sql
+├── 07_domains.sql
+└── 99_indexes.sql
+
+Each module:
+	•	Is independently executable
+	•	Respects relational hierarchy
+	•	Avoids circular dependencies
+	•	Preserves geological integrity
+
+⸻
+
+Current Status
+
+Phase 1 – Physical Infrastructure
+
+✔ Extensions
+✔ Multi-tenant layer
+✔ Drillholes
+✔ Collar geometry (POINTZ 4326)
+✔ Surveys
+✔ Sample intervals with overlap protection
+
+System backbone is established.
+
+⸻
+
+Conceptual Model
+
+Company
+└── Project
+    ├── Geological_Domains
+    └── Drillholes
+        ├── Collar
+        ├── Surveys
+        └── Samples (numrange)
+            ├── Assay_Results
+            ├── Density
+            ├── Lithology_Intervals
+            ├── Alteration_Events
+            ├── Mineralization_Intervals
+            └── Structural_Measurements
+
+
+⸻
+
+Why Interval-Centric?
+
+In a porphyry–epithermal transitional system:
+	•	Assay does not define mineralization
+	•	Alteration can occur in multiple events
+	•	Structural control may override grade
+	•	Geological domains are interpretative layers
+
+Therefore, the physical interval is the anchor of the model.
+
+⸻
+
+Roadmap
+
+Phase 2 – Geochemistry
+Phase 3 – Geological interpretation
+Phase 4 – Structural hierarchy
+Phase 5 – Domain modeling
+Phase 6 – Optimization and indexing
+
+⸻
+
+Long-Term Vision
+
+This engine is designed to support:
+	•	3D modeling workflows
+	•	Geospatial analytics
+	•	Predictive modeling
+	•	Domain-based resource estimation
+	•	Web integration (API + frontend visualization)
