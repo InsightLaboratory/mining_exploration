@@ -1,4 +1,3 @@
-cat > README.md << 'EOF'
 # 🏔 Andean Au-Dominant Transitional System – Exploration Database (v4.0)
 
 ## 📌 Overview
