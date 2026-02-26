@@ -87,10 +87,8 @@ Company
             ├── Mineralization Intervals
             └── Structural Measurements
 
-    └── Structural System
-        ├── Major Structures
-        ├── Local Structures
-        └── Measurements
+
+        
 
 Geochemical Strategy
 Epithermal Indicators
