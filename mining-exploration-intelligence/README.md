@@ -1,263 +1,167 @@
-# 🏔 Andean Au-Dominant Transitional System – Exploration Database (v4.0)
+Andean Au-Dominant Transitional System – Exploration Database (v4.0)
+Overview
 
-## 📌 Overview
+This project models a production-grade exploration database designed for an intermediate-stage Au-dominant transitional porphyry–epithermal system.
 
-This project models a hypothetical intermediate-stage exploration campaign targeting an Au-dominant transitional porphyry–epithermal system in San Juan, Argentina.
+Conceptual location: San Juan, Argentina.
 
-The objective is to design a production-grade geological database architecture capable of:
+It is not an academic schema.
 
-- Representing real-world exploration workflows
-- Integrating structural, lithological, alteration, and geochemical data
-- Supporting QA/QC and audit-ready standards
-- Scaling toward 3D modeling and advanced spatial analysis
+It is engineered to support real exploration workflows with scalability toward SaaS deployment and 3D geological modeling.
 
-This is not an academic mock schema.
-It is designed as a scalable, SaaS-ready exploration data backbone.
-
----
-
-## 🎯 Geological Context
+Geological Context
 
 Conceptual model:
 
-- Miocene Andean magmatic arc setting
-- Transitional porphyry–epithermal system
-- Au-dominant mineralization
-- Strong structural control
-- Vertical alteration zonation
+Miocene Andean magmatic arc setting
+
+Transitional porphyry–epithermal system
+
+Gold-dominant mineralization
+
+Strong structural control
+
+Vertical alteration zonation
 
 System architecture:
 
-- Shallow epithermal Au–Ag zone
-- Intermediate phyllic halo
-- Deeper porphyry Cu–Au core
+Shallow epithermal Au–Ag zone
 
----
+Intermediate phyllic halo
 
-## 🏗 Architecture Philosophy (v4.0)
+Deeper porphyry Cu–Au core
+
+Architectural Philosophy (v4.0)
 
 Core principles:
 
-- Multi-tenant ready
-- UUID-based primary keys
-- No SERIAL
-- numrange for intervals
-- EXCLUDE constraints for depth integrity
-- PostGIS-native geometry
-- Soft delete only for organizational entities
-- Explicit separation between physical samples and analytical results
-- Structural hierarchy support
-- Geological domains
+Multi-tenant ready
 
----
+UUID primary keys
 
-## 🧩 Conceptual Schema
+No SERIAL
 
-Company
- └── Project
-      ├── Geological Domains
-      └── Drillholes
-            ├── Collar (POINTZ, 4326)
-            ├── Surveys
-            ├── Samples (physical material – numrange)
-            │      ├── Assay Results (lab + method + QA/QC)
-            │      └── Density
-            ├── Lithology Intervals
-            ├── Alteration Events
-            ├── Mineralization Intervals
-            └── Structural System
-                   ├── Major Structures
-                   ├── Local Structures
-                   └── Measurements
+numrange for depth intervals
 
----
+EXCLUDE constraints for interval integrity
 
-## 🔬 Geochemical Strategy
+PostGIS-native geometry
 
-Epithermal-dominant indicators:
-- Au
-- Ag
-- As
-- Sb
-- Pb
-- Zn
+Soft deletes for organizational entities
 
-Porphyry-related indicators:
-- Cu
-- Mo
-- Fe
-- S
+Clear separation between physical samples and analytical data
 
-The schema is optimized to support:
+Explicit structural hierarchy
 
-- Pathfinder analysis
-- Vectoring interpretation
-- Vertical geochemical gradients
-- Structural association queries
+Geological domain modeling
 
----
+Technical Stack
 
-## ⚙ Technical Stack
+PostgreSQL
 
-- PostgreSQL
-- PostGIS
-- uuid-ossp
-- btree_gist
-- numrange intervals
-- EXCLUDE constraints
+PostGIS
 
-CRS default: 4326 (project-configurable)
+uuid-ossp
 
----
+btree_gist
 
-## 📈 Why This Matters
+numrange
 
-This database is designed to:
+EXCLUDE constraints
 
-- Reflect real Andean exploration systems
-- Support audit standards (NI 43-101 / JORC compatible architecture)
-- Enable future API integration
-- Scale toward 3D block modeling
-- Serve as a technical portfolio demonstrating domain + data integration
+Default CRS: 4326 (project configurable)
 
----
-
-## 🚀 Roadmap
-
-- [x] Multi-tenant base (companies, users, projects)
-- [ ] Drillhole core implementation
-- [ ] Interval integrity enforcement
-- [ ] Geological domain modeling
-- [ ] Structural hierarchy implementation
-- [ ] Geochemical normalization tools
-- [ ] Spatial visualization 
-
-Geological Core Engine – Schema 4.0
-
-Overview
-
-This repository contains the modular database architecture for a multi-tenant geological exploration system.
-
-Designed for:
-	•	Intermediate exploration stage
-	•	Transitional porphyry–epithermal systems
-	•	Gold-dominant environments
-	•	Domain-driven geological modeling
-	•	Scalable SaaS deployment
-
-Location context (conceptual): San Juan, Argentina.
-
-⸻
-
-Architectural Philosophy
-
-This schema separates:
-	•	Physical intervals (Samples)
-	•	Analytical data (Assays)
-	•	Geological interpretation (Lithology, Alteration, Mineralization)
-	•	Structural hierarchy
-	•	Domain modeling
-
-The interval is the fundamental geological unit.
-
-No analytical shortcut replaces geological reasoning.
-
-⸻
-
-Core Design Principles
-	•	UUID v4 across all entities
-	•	PostGIS spatial support
-	•	numrange for depth intervals
-	•	EXCLUDE constraints to prevent interval overlap
-	•	CRS default 4326
-	•	Multi-tenant architecture
-	•	Modular SQL implementation
-
-⸻
-
-Modular Structure
-
-database/
-│
-├── 00_extensions.sql
-├── 01_multitenant.sql
-├── 02_core_drillholes.sql
-├── 03_sampling.sql
-├── 04_geochemistry.sql
-├── 05_geology.sql
-├── 06_structural.sql
-├── 07_domains.sql
-└── 99_indexes.sql
-
-Each module:
-	•	Is independently executable
-	•	Respects relational hierarchy
-	•	Avoids circular dependencies
-	•	Preserves geological integrity
-
-⸻
-
-Current Status
-
-Phase 1 – Physical Infrastructure
-
-✔ Extensions
-✔ Multi-tenant layer
-✔ Drillholes
-✔ Collar geometry (POINTZ 4326)
-✔ Surveys
-✔ Sample intervals with overlap protection
-
-System backbone is established.
-
-⸻
-
-Conceptual Model
+Conceptual Schema
 
 Company
 └── Project
-    ├── Geological_Domains
+    ├── Geological Domains
     └── Drillholes
-        ├── Collar
+        ├── Collar (POINTZ)
         ├── Surveys
         └── Samples (numrange)
-            ├── Assay_Results
+            ├── Assay Results
             ├── Density
-            ├── Lithology_Intervals
-            ├── Alteration_Events
-            ├── Mineralization_Intervals
-            └── Structural_Measurements
+            ├── Lithology Intervals
+            ├── Alteration Events
+            ├── Mineralization Intervals
+            └── Structural Measurements
 
+    └── Structural System
+        ├── Major Structures
+        ├── Local Structures
+        └── Measurements
 
-⸻
+Geochemical Strategy
+Epithermal Indicators
+
+Au
+
+Ag
+
+As
+
+Sb
+
+Pb
+
+Zn
+
+Porphyry Indicators
+
+Cu
+
+Mo
+
+Fe
+
+S
+
+Supports:
+
+Pathfinder analysis
+
+Vectoring interpretation
+
+Vertical geochemical gradients
+
+Structural association queries
 
 Why Interval-Centric?
 
-In a porphyry–epithermal transitional system:
-	•	Assay does not define mineralization
-	•	Alteration can occur in multiple events
-	•	Structural control may override grade
-	•	Geological domains are interpretative layers
+In transitional systems:
 
-Therefore, the physical interval is the anchor of the model.
+Assays do not define mineralization
 
-⸻
+Alteration occurs in multiple events
+
+Structural control dominates geometry
+
+Domains are interpretative layers
+
+👉 The physical interval is the fundamental geological unit.
 
 Roadmap
 
+Phase 1 – Physical Infrastructure
 Phase 2 – Geochemistry
-Phase 3 – Geological interpretation
-Phase 4 – Structural hierarchy
-Phase 5 – Domain modeling
-Phase 6 – Optimization and indexing
-
-⸻
+Phase 3 – Geological Interpretation
+Phase 4 – Structural Hierarchy
+Phase 5 – Domain Modeling
+Phase 6 – Optimization & Indexing
 
 Long-Term Vision
 
-This engine is designed to support:
-	•	3D modeling workflows
-	•	Geospatial analytics
-	•	Predictive modeling
-	•	Domain-based resource estimation
-	•	Web integration (API + frontend visualization)
+This engine supports:
+
+3D modeling workflows
+
+Geospatial analytics
+
+Predictive modeling
+
+Domain-based resource estimation
+
+API integration
+
+Frontend visualization
