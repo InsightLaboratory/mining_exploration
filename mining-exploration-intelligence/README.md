@@ -73,23 +73,23 @@ Default CRS: 4326 (project configurable)
 
 Conceptual Schema
 
-Company
-└── Project
-    ├── Geological Domains
-    └── Drillholes
-        ├── Collar (POINTZ)
-        ├── Surveys
-        └── Samples (numrange)
-            ├── Assay Results
-            ├── Density
-            ├── Lithology Intervals
-            ├── Alteration Events
-            ├── Mineralization Intervals
-            └── Structural Measurements
-
-
         
 
+    Company
+        └── Project 
+               ├── Gological Domains
+               └── Drillholes
+                       ├──Collar (POINTZ)
+                       ├──Surveys
+                       └──Samples (numrange)
+                             ├── Assay Results
+                             ├── Density
+                             ├── Lithology Intervals
+                             ├── Alteration Events
+                             ├── Mineralization Intervals
+                             └──Structural Measurements
+
+                             
 Geochemical Strategy
 Epithermal Indicators
 
